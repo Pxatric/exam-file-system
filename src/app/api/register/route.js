@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../lib/db";
 import bcrypt from 'bcrypt';
-import { Role } from '@prisma/client'; // นำเข้า Role enum
 
 export async function POST(req) {
     try {
@@ -11,12 +10,6 @@ export async function POST(req) {
         if (!firstname || !lastname || !role || !tel || !email || !username || !password) {
             throw new Error("Missing fields");
         }
-
-        // ตรวจสอบให้แน่ใจว่าค่า role ถูกต้อง
-        const validRoles = Object.values(Role); // ดึงค่าจาก Role enum
-            if (!validRoles.includes(role)) {
-            throw new Error(`Invalid role. Expected one of ${validRoles.join(', ')}`);
-            }
 
         // ตรวจสอบว่ามี email หรือ username ซ้ำหรือไม่
         const existingUser = await prisma.user.findFirst({
@@ -35,15 +28,12 @@ export async function POST(req) {
         // แฮชพาสเวิร์ดก่อนบันทึก
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // ส่งค่าของ role เป็น Enum
-        const roleEnum = Role[role]; // ใช้ Enum ในการกำหนด role
-
         // บันทึกข้อมูลลงในฐานข้อมูล
         const newUser = await prisma.user.create({
             data: {
                 firstname,
                 lastname,
-                role: roleEnum, // ใช้ Enum ที่สร้างขึ้น
+                role, // ใช้ role เป็น String โดยตรง
                 tel,
                 email,
                 username,

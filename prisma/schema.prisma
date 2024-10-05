@@ -13,18 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  Admin
-  Teacher
-  ExamTech
-  Technology
-}
 
 model User {
   id        Int    @id @default(autoincrement())
   firstname String
   lastname  String
-  role      Role   // เปลี่ยนจาก String เป็น Role Enum
+  role      String   
   tel       String
   email     String @unique
   username  String @unique
