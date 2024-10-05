@@ -1,6 +1,6 @@
 "use client";
 
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; 
 import Container from '../components/Container';
 import Navbar from '../components/Navbar';
@@ -13,24 +13,25 @@ const LoginPage = () => {
   
   const router = useRouter();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-        const res = await signIn("credentials",{
-          username,password,redirect:false
-        })
+    try {
+      const res = await signIn("credentials", {
+        username,
+        password,
+        redirect: false,
+      });
 
-        if (res.error) {
-          setErrorMessage("Invalid credentials");
-          return;
-        }
+      if (res.error) {
+        setErrorMessage("Invalid credentials");
+        return;
+      }
 
-        router.replace("Welcome");
-
-    } catch(error) {
-      console.log(error)
+      router.replace("Welcome");
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className='min-h-screen bg-[#e8e8e8]'>
@@ -42,9 +43,9 @@ const LoginPage = () => {
               <h3 className='text-3xl text-center'>เข้าสู่ระบบ</h3>
               <hr className='my-3' />
               <form onSubmit={handleSubmit}>
-                {errorMessage && (
+                {errorMessage && ( // ใช้ errorMessage แทน error
                   <div className='bg-red-500 w-fit text-sm text-white py-1 rounded-md mt-2'>
-                      {errorMessage}
+                    {errorMessage}
                   </div>
                 )}
 
