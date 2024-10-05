@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import AdminNav from "../component/AdminNav";
 import SideNav from "../component/SideNav";
 import Container from "../component/Container";
+
 
 function AdminUserManagePage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -92,7 +92,6 @@ function AdminUserManagePage() {
 
   return (
     <Container>
-      <AdminNav />
       <div className="flex grow">
         <SideNav />
         <main className="flex-grow ml-1/4 p-5 bg-gray-50 rounded-lg shadow-lg">

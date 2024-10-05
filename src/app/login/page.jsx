@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; 
 import Container from '../components/Container';
-import Navbar from '../components/Navbar';
 import { signIn } from 'next-auth/react';
 
 const LoginPage = () => {
@@ -36,7 +35,6 @@ const LoginPage = () => {
   return (
     <div className='min-h-screen bg-[#e8e8e8]'>
       <Container>
-        <Navbar />
         <div className='flex grow'>
           <div className='flex justify-center items-center w-full'>
             <div className='w-[400px] shadow-[0px_4px_10px_-5px_#0B121B] p-10 mt-5 rounded-2xl bg-[#ffffff]'>
